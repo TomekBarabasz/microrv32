@@ -31,13 +31,13 @@ class CSRUnit(val cfg : RV32CoreConfig) extends Area {
 
     // CSR registers
     // Machine Information Registers
-    val mvendorid = Reg(Bits(32 bits)) init(0) //RO - Vendor ID 
-    val marchid = Reg(Bits(32 bits)) init(MARCHID_MICRORV32) // RO - Architecture ID
-    val mimpid = Reg(Bits(32 bits)) init(0) // RO - Implementation ID
-    val mhartid = Reg(Bits(32 bits)) init(0) // RO - Hardware thread ID
+    val mvendorid = (Reg(Bits(32 bits)) init(0)).allowUnsetRegToAvoidLatch() //RO - Vendor ID 
+    val marchid = (Reg(Bits(32 bits)) init(MARCHID_MICRORV32)).allowUnsetRegToAvoidLatch() // RO - Architecture ID
+    val mimpid = (Reg(Bits(32 bits)) init(0)).allowUnsetRegToAvoidLatch() // RO - Implementation ID
+    val mhartid = (Reg(Bits(32 bits)) init(0)).allowUnsetRegToAvoidLatch() // RO - Hardware thread ID
     // Machine Trap Setup
     val mstatus = Reg(Bits(32 bits)) init(MSTATUS_DEFAULT) // RW - Machine status retgister
-    val misa = Reg(Bits(32 bits)) init(generateMISAValue(cfg.hasMULDIV, cfg.supportCompressed)) // RW - ISA and extensions
+    val misa = (Reg(Bits(32 bits)) init(generateMISAValue(cfg.hasMULDIV, cfg.supportCompressed))).allowUnsetRegToAvoidLatch() // RW - ISA and extensions
     val medeleg = Reg(Bits(32 bits)) init(0) // RW - Machine exception delegation register
     val mideleg = Reg(Bits(32 bits)) init(0) // RW - Machine interrupt delegation register
     val mie = Reg(Bits(32 bits)) init(0) // RW - Machine interrupt-enable register
