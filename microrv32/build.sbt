@@ -1,21 +1,24 @@
-ThisBuild / version := "1.0"
-ThisBuild / scalaVersion := "2.12.18"
-ThisBuild / organization := "org.example"
+// microrv32 - fork dla projektow newhope (FPGA-snake).
+// Wersje MUSZA byc te same co w fpga-hw-lib/sbt/HwBuild.scala: konsument laduje
+// ten build w jednej sesji sbt przez ProjectRef(file("cpu/microrv32/microrv32"), "microrv32").
+ThisBuild / version      := "1.0-newhope"
+ThisBuild / scalaVersion := "2.13.14"
+ThisBuild / organization := "core.microrv32"
 
-val spinalVersion = "1.10.2a"
+val spinalVersion = "1.12.3"
 val spinalCore = "com.github.spinalhdl" %% "spinalhdl-core" % spinalVersion
 val spinalLib = "com.github.spinalhdl" %% "spinalhdl-lib" % spinalVersion
 val spinalIdslPlugin = compilerPlugin("com.github.spinalhdl" %% "spinalhdl-idsl-plugin" % spinalVersion)
 
-
-name := "microrv32"
-version := "1.0"
-
-lazy val projectname = (project in file("."))
+// id "microrv32" (bylo: projectname) - pod tym id widzi go konsument
+lazy val microrv32 = (project in file("."))
   .settings(
-    Compile / scalaSource := baseDirectory.value / "src" ,
-    libraryDependencies ++= Seq(spinalCore, spinalLib, spinalIdslPlugin)
+    name := "microrv32",
+    Compile / scalaSource := baseDirectory.value / "src",
+    Test    / scalaSource := baseDirectory.value / "test",
+    libraryDependencies ++= Seq(spinalCore, spinalLib, spinalIdslPlugin,
+                                "org.scalatest" %% "scalatest" % "3.2.19" % Test),
+    Test / parallelExecution := false,
+    fork := true,
+    publish / skip := true
   )
-
-fork := true
-

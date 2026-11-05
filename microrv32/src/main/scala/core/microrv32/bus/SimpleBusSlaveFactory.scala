@@ -43,15 +43,15 @@ class SimpleBusSlaveFactory(bus: SimpleBus, select: Bool,addressBits : Int, dont
     switch(localAddress) {
       for ((address, jobs) <- elementsPerAddress if address.isInstanceOf[SingleMapping]) {
         is(address.asInstanceOf[SingleMapping].address) {
-          doMappedElements(jobs)
+          doMappedElements(jobs.toSeq)
         }
       }
     }
 
     for ((address, jobs) <- elementsPerAddress if !address.isInstanceOf[SingleMapping]) {
       when(address.hit(bus.SBaddress)){
-        report(jobs)
-        doMappedElements(jobs)
+        report(jobs.toSeq)
+        doMappedElements(jobs.toSeq)
       }
     }
   }

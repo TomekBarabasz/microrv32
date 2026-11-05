@@ -43,3 +43,8 @@ bin/
 simWorkspace/
 tmp/
 null
+
+# newhope
+simWorkspace/
+**/simWorkspace/
+.bsp/
