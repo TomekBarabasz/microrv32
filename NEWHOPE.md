@@ -6,7 +6,7 @@ Gałąź robocza: `newhope`. Upstream: `git remote add upstream https://github.c
 ## Zmiany względem upstreamu (`master`, ada1264)
 | | upstream | newhope |
 | --- | --- | --- |
-| Scala / SpinalHDL / sbt | 2.12.18 / 1.10.2a / 1.3.3 | 2.13.14 / 1.12.3 / 1.12.4 (jak fpga-hw-lib) |
+| Scala / SpinalHDL / sbt | 2.12.18 / 1.10.2a / 1.3.3 | 2.13.14 / 1.15.0 / 1.12.4 (jak fpga-hw-lib) |
 | id projektu sbt | `projectname` | `microrv32` |
 
 - `SimpleBusSlaveFactory`: `ArrayBuffer` → `.toSeq` (Scala 2.13).
